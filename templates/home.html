@@ -15,7 +15,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 offset-md-4 card">
-            <form action="/analyse_video" method="post" enctype="multipart/form-data">
+            <form name="form" method="post" onsubmit="return OnSubmitForm();" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="algorithm">Algorithm</label>
                     <select name="algorithm" class="form-control" id="algorithm">
@@ -43,7 +43,7 @@
                         <input type="text" name="results_per_second" class="form-control">
                     </div>
                 </div>
-                <input type="submit" value="Submit" class="btn btn-primary">
+                <input type="submit" value="Submit" name="submit" class="btn btn-primary">
             </form>
         </div>
     </div>
@@ -64,4 +64,22 @@
     }
   });
 $("#input_type").trigger("change");
+</script>
+
+<script type="text/javascript">
+    function OnSubmitForm()
+    {
+        var selected = document.getElementById("input_type")
+        var value = selected.options[selected.selectedIndex].value;
+        if(value == "image")
+        {
+            document.form.action ="/analyse_image";
+        }
+        else
+        if(value == "video")
+        {
+            document.form.action ="/analyse_video";
+        }
+        return true;
+    }
 </script>
