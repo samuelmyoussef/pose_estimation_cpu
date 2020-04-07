@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Body analysis service</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 card">
+            <form action="/analyse_video" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="algorithm">Algorithm</label>
+                    <select name="algorithm" class="form-control" id="algorithm">
+                        <option value="openpose">Openpose (default)</option>
+                        <option value="tf-openpose">Tensorflow Openpose</option>
+                    </select>
+                    <br/>
+
+                    <label for="input_type">Input Type</label>
+                    <select name="input_type" class="form-control" id="input_type">
+                            <option value="image">Image</option>
+                            <option value="video">Video</option>
+                    </select>
+                    <br/>
+
+                    <div class="form-group" id="image">
+                        <label for="image">Upload Image</label>
+                        <input type="file" name="image" class="form-control">
+                    </div>
+
+                    <div class="form-group" id="video">
+                        <label for="video">Upload Video</label>
+                        <input type="file" name="video" class="form-control">
+                        <label for="results_per_second">Results per Second</label>
+                        <input type="text" name="results_per_second" class="form-control">
+                    </div>
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<script>
+    $("#input_type").change(function() {
+    if ($(this).val() == "image") {
+      $('#image').show();
+      $('#video').hide();
+    } else {
+      $('#image').hide();
+      $('#video').show();
+    }
+  });
+$("#input_type").trigger("change");
+</script>
